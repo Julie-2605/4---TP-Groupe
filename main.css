@@ -186,7 +186,7 @@ img {
    }
    
    button:hover:not(:disabled) {
-    background-color: rgb(206, 51, 51);
+    background-color: rgb(207, 51, 51);
     color: white;
     
    }
@@ -195,3 +195,98 @@ img {
     cursor: auto;
     color: grey;
    }
+
+   .search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+  }
+  
+  .search__input {
+    font-family: inherit;
+    font-size: inherit;
+    background-color: #f4f2f2;
+    border: none;
+    color: #646464;
+    padding: 0.7rem 1rem;
+    border-radius: 30px;
+    width: 12em;
+    transition: all ease-in-out .5s;
+    margin-right: -2rem;
+  }
+  
+  .search__input:hover, .search__input:focus {
+    box-shadow: 0 0 1em #00000013;
+  }
+  
+  .search__input:focus {
+    outline: none;
+    background-color: #f0eeee;
+  }
+  
+  .search__input::-webkit-input-placeholder {
+    font-weight: 100;
+    color: #ccc;
+  }
+  
+  .search__input:focus + .search__button {
+    background-color: #f0eeee;
+  }
+  
+  /*rechercher*/
+
+  .input__container--variant {
+    margin-top: 15%;
+    margin-left: 43%;
+    background: linear-gradient(to bottom, #eaeaea, #eaeaea);
+    border-radius: 30px;
+    max-width: 10px;
+    padding: 1em 1em;
+  }
+  
+  .shadow__input--variant {
+    filter: blur(25px);
+    border-radius: 30px;
+    background-color: #e7e7e7;
+    opacity: 0.5;
+    width: 80%;
+  }
+  
+  .input__button__shadow--variant {
+    border-radius: 15px;
+    background-color: #1b1b1b;
+    padding: 10px;
+    border: none;
+    width:100%
+  }
+  
+  .input__button__shadow--variant:hover {
+    background-color: #292988;
+  }
+  
+  .input__search--variant {
+    width: 13em;
+    align-items: center;
+    border-radius: 13em;
+    outline: none;
+    border: none;
+    padding: 0.8em;
+    font-size: 1.2em;
+    color: #002019;
+    background-color: transparent;
+  }
+  
+  .input__search--variant::placeholder {
+    color: #002019;
+    opacity: 0.7;
+  }
+  
+  .input__container--variant {
+    background: linear-gradient(to bottom, #ce33337d, #ce33337d);
+    border-radius: 1.5em;
+    max-width: 14em;
+    padding: 1em;
+    box-shadow: 0em 1em 3em #ce33337d;
+  }
+  
