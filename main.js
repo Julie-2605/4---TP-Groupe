@@ -57,6 +57,7 @@ function getPokemonTypes(pokemon) {
     return AllTypes;
 }
 
+
 //Cibler Evolutions
 //Cibler EvolutionsPre Name
 function getEvolutionsPreName(pokemon) {
@@ -86,8 +87,6 @@ function getEvolutionsPreID(pokemon) {
         let EvolutionPreTab = objectEvolutions["pre"];
 
         let EvolutionPreID = EvolutionPreTab[EvolutionPreTab.length - 1]["pokedexId"];
-
-        console.log(EvolutionPreID);
 
         return EvolutionPreID;
     }
@@ -119,8 +118,6 @@ function getEvolutionsNextID(pokemon) {
         let EvolutionNextTab = objectEvolutions["next"];
 
         let EvolutionNextID = EvolutionNextTab[0]["pokedexId"];
-
-        console.log(EvolutionNextID);
 
         return EvolutionNextID;
     }
@@ -179,7 +176,7 @@ function showPokemon(pokemon) {
 //RETOUR DU NUMÉRO DE LA GÉNÉRATION
 function returnGeneration(NumberGen) {
     let cible = document.getElementById("listPokemon");
-        cible.innerHTML = " ";
+    cible.innerHTML = " ";
 
     //LISTE POKEMON PAR GENERATION
     function showListPokemon(list) {
@@ -238,8 +235,8 @@ async function showPokeDetails(PokeID) {
         src="`+ PokeSprites + `"
         alt="Image de `+ PokeName + `" />
         </article>
-        <button class="Evolutions" type="button" onclick="EvolutionPre(`+ EvolutionPreID +`)"> < `+ EvolutionPreName +`</button>
-        <button class="Evolutions" type="button" onclick="EvolutionNext(`+ EvolutionNextID +`)"> `+ EvolutionNextName +` > </button>
+        <button class="Evolutions" type="button" onclick="EvolutionPre(`+ EvolutionPreID + `)"> < ` + EvolutionPreName + `</button>
+        <button class="Evolutions" type="button" onclick="EvolutionNext(`+ EvolutionNextID + `)"> ` + EvolutionNextName + ` > </button>
         </br>
         <button class="goBack" type="button" onclick="goBack()">Retourner à la liste</button>`;
 
@@ -304,43 +301,73 @@ function showListTypes(list) {
 function showTypes(Type) {
     let cible = document.getElementById("Types");
 
-    console.log(Type.name["fr"]);
-
     let TypeName = JSON.stringify(Type.name);
 
     let objectTypeName = JSON.parse(TypeName);
 
     TypeName = objectTypeName["fr"];
 
-    // TypeSprite = 
-
     let contenu = `
-    <button class="buttonGeneration" type="button" onclick="returnType(`+ TypeName + `)"> Types ` + TypeName + `</button>
+    <button class="buttonGeneration" type="button" onclick="returnType(`+ Type.id + `)"> Types ` + TypeName + ` <img src="` + Type.sprites + `"/></button>
     `;
 
     cible.innerHTML = cible.innerHTML + contenu;
 }
 
+//ABANDON
+function returnType(TypeName) {
+    let cible = document.getElementById("listPokemon");
+    cible.innerHTML = " ";
+
+        //LISTE POKEMON PAR GENERATION
+        function showListPokemon(list) {
+
+            list.forEach(element => {
+                showPokemon(element)
+            });
+
+        }
+
+    //Récupérer données API
+    fetch('https://tyradex.vercel.app/api/v1/pokemon')
+        .then((response) => response.json())
+        .then((listPokemon) => showListPokemon(listPokemon));
+}
 
 
 
-//Récupérer données API POUR AFFICHER LES BUTTONS GÉNÉRATION
+
+
+
+//SEARCH
+function Search() {
+    
+}
+
+
+//Récupérer données API FUNCTION PAR PAGE
 function startGen() {
     fetch('https://tyradex.vercel.app/api/v1/gen')
-    .then((response) => response.json())
-    .then((listPokemon) => showListGeneration(listPokemon));
+        .then((response) => response.json())
+        .then((listPokemon) => showListGeneration(listPokemon));
 }
 
 function startIndex() {
     getRandomPokemon()
-    .then((PokeRandom) => {
-        let contenu = showPokemon(PokeRandom);
-        $("#PokeRandom").html(contenu);
-    });
+        .then((PokeRandom) => {
+            let contenu = showPokemon(PokeRandom);
+            $("#PokeRandom").html(contenu);
+        });
 }
 
 function startTypes() {
     fetch('https://tyradex.vercel.app/api/v1/types')
-    .then((response) => response.json())
-    .then((listPokemon) => showListTypes(listPokemon))
+        .then((response) => response.json())
+        .then((listPokemon) => showListTypes(listPokemon))
+}
+
+function startSearch() {
+    fetch('hhttps://tyradex.vercel.app/api/v1/pokemon')
+        .then((response) => response.json())
+        .then((listPokemon) => showListPokemon(listPokemon))
 }
