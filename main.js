@@ -282,9 +282,44 @@ function showListTypes(list) {
 //TYPES DETAILS
 
 function showListDetails() {
+    let cible = document.getElementById("Types");
 
+    let contenu = `
+    <button class="buttonTypes" type="button" onclick="returnTypes(`+ Types.generation + `)"> Génération ` + Types.generation + `</button>
+    `;
+
+    cible.innerHTML = cible.innerHTML + contenu;
 }
 
+
+
+function showListTypes(list) {
+    list.forEach(element => {
+        showTypes(element)
+    });
+}
+
+
+//AFFICHAGE DES BUTTONS GÉNÉRATIONS
+function showTypes(Type) {
+    let cible = document.getElementById("Types");
+
+    console.log(Type.name["fr"]);
+
+    let TypeName = JSON.stringify(Type.name);
+
+    let objectTypeName = JSON.parse(TypeName);
+
+    TypeName = objectTypeName["fr"];
+
+    // TypeSprite = 
+
+    let contenu = `
+    <button class="buttonGeneration" type="button" onclick="returnType(`+ TypeName + `)"> Types ` + TypeName + `</button>
+    `;
+
+    cible.innerHTML = cible.innerHTML + contenu;
+}
 
 
 
@@ -302,4 +337,10 @@ function startIndex() {
         let contenu = showPokemon(PokeRandom);
         $("#PokeRandom").html(contenu);
     });
+}
+
+function startTypes() {
+    fetch('https://tyradex.vercel.app/api/v1/types')
+    .then((response) => response.json())
+    .then((listPokemon) => showListTypes(listPokemon))
 }
