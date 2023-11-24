@@ -78,6 +78,13 @@ nav {
     margin-block-end: 7%;
 }
 
+#PokeRandom {
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    width: auto;
+    size: 900px;
+}
 
 #listPokemon {
     display: flex;
