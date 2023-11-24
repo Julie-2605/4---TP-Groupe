@@ -21,6 +21,9 @@ nav {
     list-style: none;
     display: block;
     padding: 8px;
+    font-size: 120%;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
  }
  nav  a:hover {
     color: rgb(51, 69, 206);
@@ -39,7 +42,7 @@ nav {
  }
 
  h1{
-    color: rgb(41, 41, 136);
+    color: rgb(255, 255, 255);
     display: flex;
     padding-top: 2px;
     font-family: sans-serif;
@@ -55,16 +58,16 @@ nav {
     border-radius: 2%;
     background-color: rgb(206, 51, 51);
     overflow: hidden;
-    font-family: sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 160%;
     color: aliceblue;
-    font-weight: bold;
     width: 50%;
 }
 
 
 
 .PokemonCard {
+    margin-top: 50px;
     border: 2px solid rgb(211, 211, 211);
     width: 30%;
     text-align: center;
@@ -75,6 +78,13 @@ nav {
     margin-block-end: 7%;
 }
 
+#PokeRandom {
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    width: auto;
+    size: 900px;
+}
 
 #listPokemon {
     display: flex;
