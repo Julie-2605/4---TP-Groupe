@@ -4,7 +4,7 @@ h1{
 }
 
 
-.Pokemon{
+.infos{
     margin: 5%;
     list-style: none;
     display: block;
@@ -20,7 +20,7 @@ h1{
     width: 50%;
 }
 
-.cards {
+.PokemonCard {
     border: 2px solid black;
     width: 30%;
     text-align: center;
