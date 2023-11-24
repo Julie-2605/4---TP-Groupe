@@ -226,8 +226,8 @@ async function showPokeDetails(PokeID) {
     let EvolutionNextID = getEvolutionsNextID(pokemon);
 
     let contenu = `
-        <article>
-        <p>n°`+ pokemon.pokedexId + `
+        <article class="PokemonCard">
+        <p class="infos">n°`+ pokemon.pokedexId + `
         </br>`+ pokemon.generation + `e Génération
         </br> Nom : `+ PokeName + `
         </br> Type : `+ PokeTypes + `
