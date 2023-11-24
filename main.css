@@ -21,9 +21,14 @@ h1{
 }
 
 .PokemonCard {
-    border: 2px solid black;
+    border: 2px solid rgb(211, 211, 211);
     width: 30%;
     text-align: center;
+    border-radius: 49px;
+    background: linear-gradient(45deg, #cacaca, #fcfbfb);
+    box-shadow:  28px -28px 33px #d0d0d0,
+             -28px 28px 33px #fcfbfb;
+    margin-block-end: 7%;
 }
 
 #listPokemon {
