@@ -17,6 +17,22 @@ h1{
     font-size: 160%;
     color: aliceblue;
     font-weight: bold;
-    width: 30%;
+    width: 50%;
 }
 
+.cards {
+    border: 2px solid black;
+    width: 30%;
+    text-align: center;
+}
+
+#listPokemon {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+img {
+    width: 30%;
+}

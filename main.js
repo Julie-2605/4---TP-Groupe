@@ -27,15 +27,15 @@ function showPokemon(pokemon) {
     let PokeSprites = objectSprites["regular"];
 
     //Créer le contenu
-    let contenu = `
-    <p class="Pokemon"> n°`+ pokemon.pokedexId +`
+    let contenu = `<div class='cards'>`+
+    `<p class="Pokemon"> n°`+ pokemon.pokedexId +`
     </br>`+ pokemon.generation +`e Génération
     </br> Nom :`+ PokeName +`</p>
     </br>
     <img
     class="imgPoke"
     src="`+ PokeSprites +`"
-    alt="Image de `+ PokeName +`" />`;
+    alt="Image de `+ PokeName +`" />`+`</div>`;
 
     //Ajouter le contenu dans la cible
     cible.innerHTML = cible.innerHTML + contenu;
