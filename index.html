@@ -13,9 +13,24 @@
 </head>
 
 <body>
-    <h1>Pokédex</h1>
+    <script>startIndex();</script>
 
+    <nav>
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="generation.html">Génération</a></li>
+            <li><a href="type.html">Types</a></li>
+            <li><input type="search" id="BarreRecherche" name="BarreRecherche"></li>
+        </ul>
+    </nav>
+
+    <h1>Pokédex</h1>
+    
     <section>
+        <article id="PokeDetails"></article>
+    </section>
+
+    <section id="listPokemon">
         <section id="PokeRandom"></section>
     </section>
 </body>
