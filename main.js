@@ -340,10 +340,23 @@ function returnType(TypeName) {
 
 
 //SEARCH
-function Search() {
-    
-}
+// function Search() {
+//     let input, filter,article, p, textValue;
+//     input = document.getElementById("Search");
+//     filter = input.ariaValueMax.toUpperCase();
+//     main = document.getElementById("ListPokemon");
+//     article = article.getElementsByTageName("article");
 
+//     for (i = 0; i < article.length; i++) {
+//         p = article[i].getElementsByTageName("p")[0];
+//         textValue = p.textcONTENT || p.innerText;
+//         if(textValue.toUpperCase().indexOf(filter) > -1) {
+//             article[i].style.display = "";
+//         } else {
+//             article[i].style.display = "none";
+//         }
+//     }
+// }
 
 //Récupérer données API FUNCTION PAR PAGE
 function startGen() {
@@ -367,7 +380,7 @@ function startTypes() {
 }
 
 function startSearch() {
-    fetch('hhttps://tyradex.vercel.app/api/v1/pokemon')
+    fetch('https://tyradex.vercel.app/api/v1/pokemon')
         .then((response) => response.json())
         .then((listPokemon) => showListPokemon(listPokemon))
 }
