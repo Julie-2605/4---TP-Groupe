@@ -180,7 +180,7 @@ async function showPokeDetails(PokeID) {
 
     let EvolutionNext = getPokemonEvolutionsNext(pokemon);
 
-    console.log(PokeEvolutions);
+    console.log(EvolutionNext);
 
     let contenu = `
         <article>
