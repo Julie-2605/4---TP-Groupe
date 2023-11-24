@@ -146,9 +146,12 @@ function showPokemon(pokemon) {
     let PokeTypes = getPokemonTypes(pokemon);
 
     //Créer le contenu
+
+   
+
     let contenu = `
         <article class="PokemonCard" onclick="showPokeDetails(`+ pokemon.pokedexId + `)">
-            <p> n°`+ pokemon.pokedexId + `
+            <p class="infos" > n°`+ pokemon.pokedexId + `
             </br> Nom : `+ PokeName + `
             </br> Type : `+ PokeTypes + `
             </p>
@@ -158,6 +161,7 @@ function showPokemon(pokemon) {
             src="`+ PokeSprites + `"
             alt="Image de `+ PokeName + `" />
         </article>`;
+
 
     //Ajouter le contenu dans la cible
     cible.innerHTML = cible.innerHTML + contenu;
