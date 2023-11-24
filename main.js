@@ -63,8 +63,9 @@ function getPokemonTypes(pokemon) {
     return AllTypes;
 }
 
-//Cibler EvolutionsPre
-function getPokemonEvolutionsPre(pokemon) {
+
+//Cibler EvolutionsPre Name
+function getEvolutionsPreName(pokemon) {
     let evolutions = JSON.stringify(pokemon.evolution);
 
     let objectEvolutions = JSON.parse(evolutions);
@@ -73,17 +74,32 @@ function getPokemonEvolutionsPre(pokemon) {
     if (objectEvolutions && objectEvolutions["pre"] !== null) {
         let EvolutionPreTab = objectEvolutions["pre"];
 
-        let EvolutionPokeName = EvolutionPreTab[0]["name"];
+        let EvolutionPreName = EvolutionPreTab[0]["name"];
 
-        console.log('Evolution Pre' + EvolutionPokeName);
-
-        return EvolutionPreTab;
+        return EvolutionPreName;
     }
 
 }
 
-//Cibler EvolutionsNext
-function getPokemonEvolutionsNext(pokemon) {
+//Cibler EvolutionsPre PokedexID
+function getEvolutionsPreID(pokemon) {
+    let evolutions = JSON.stringify(pokemon.evolution);
+
+    let objectEvolutions = JSON.parse(evolutions);
+
+    // Cibler Évolution Précédente
+    if (objectEvolutions && objectEvolutions["pre"] !== null) {
+        let EvolutionPreTab = objectEvolutions["pre"];
+
+        let EvolutionPreID = EvolutionPreTab["pokedexId"];
+
+        return EvolutionPreID;
+    }
+
+}
+
+//Cibler EvolutionsNext Name
+function getEvolutionsNextName(pokemon) {
     let evolutions = JSON.stringify(pokemon.evolution);
 
     let objectEvolutions = JSON.parse(evolutions);
@@ -91,13 +107,28 @@ function getPokemonEvolutionsNext(pokemon) {
     if (objectEvolutions && objectEvolutions["next"] !== null) {
         let EvolutionNextTab = objectEvolutions["next"];
 
-        let EvolutionPokeName = EvolutionNextTab[0]["name"];
+        let EvolutionNexteName = EvolutionNextTab[0]["name"];
 
-        console.log('Evolution Next' + EvolutionPokeName);
-
-        return EvolutionNextTab;
+        return EvolutionNexteName;
     }
 }
+
+//Cibler EvolutionsNext PokedexID
+function getEvolutionsNextID(pokemon) {
+    let evolutions = JSON.stringify(pokemon.evolution);
+
+    let objectEvolutions = JSON.parse(evolutions);
+
+    if (objectEvolutions && objectEvolutions["next"] !== null) {
+        let EvolutionNextTab = objectEvolutions["next"];
+
+        let EvolutionNextID = EvolutionNextTab["pokedexId"];
+
+        return EvolutionNextID;
+    }
+}
+
+
 
 //LISTE DE POKEMON
 function showPokemon(pokemon) {
@@ -157,8 +188,6 @@ function returnGeneration(NumberGen) {
 
 
 
-
-
 //POKEMON DETAILS
 
 async function showPokeDetails(PokeID) {
@@ -176,11 +205,21 @@ async function showPokeDetails(PokeID) {
     let PokeTypes = getPokemonTypes(pokemon);
 
     //Cibler Evolution
-    let EvolutionPre = getPokemonEvolutionsPre(pokemon);
+    let EvolutionPreName = getEvolutionsPreName(pokemon);
 
-    let EvolutionNext = getPokemonEvolutionsNext(pokemon);
+    let EvolutionNextName = getEvolutionsNextName(pokemon);
 
-    console.log(EvolutionNext);
+    // let EvolutionPreID = getEvolutionsPreID(pokemon);
+
+    // let EvolutionNextID = getEvolutionsNextID(pokemon);
+
+    function EvolutionPre(EvolutionPreID) {
+        fetch('https://tyradex.vercel.app/api/v1/pokemon/' + EvolutionPreID);
+
+    }
+
+
+
 
     let contenu = `
         <article>
@@ -195,8 +234,8 @@ async function showPokeDetails(PokeID) {
         src="`+ PokeSprites + `"
         alt="Image de `+ PokeName + `" />
         </article>
-        <button class="Evolutions" type="button" onclick="EvolutionAnt()"> < `+ EvolutionPre[0]["name"] +`</button>
-        <button class="Evolutions" type="button" onclick="EvolutionPrec()"> `+ EvolutionNext[0]["name"] +` > </button>
+        <button class="Evolutions" type="button" onclick="EvolutionPre()"> < `+ EvolutionPreName +`</button>
+        <button class="Evolutions" type="button" onclick="EvolutionNext()"> `+ EvolutionNextName +` > </button>
         </br>
         <button class="goBack" type="button" onclick="goBack()">Retourner à la liste</button>`;
 
