@@ -17,11 +17,87 @@ function showGeneration(Generation) {
     cible.innerHTML = cible.innerHTML + contenu;
 }
 
+
 //Récupérer données API POUR AFFICHER LES BUTTONS GÉNÉRATION
 fetch('https://tyradex.vercel.app/api/v1/gen')
     .then((response) => response.json())
     .then((listPokemon) => showListGeneration(listPokemon));
 
+
+
+
+
+//FONCTIONS RÉCUPÉRATION DES DONNÉES DES POKEMON UTILISÉS
+//Cibler name
+function getPokemonName(pokemon) {
+    let name = JSON.stringify(pokemon.name);
+
+    let objectName = JSON.parse(name);
+
+    return objectName["fr"];
+}
+
+//Cibler Sprites
+function getPokemonSprites(pokemon) {
+
+    let sprites = JSON.stringify(pokemon.sprites);
+
+    let objectSprites = JSON.parse(sprites);
+
+    return objectSprites["regular"];
+}
+
+//Cibler Types
+function getPokemonTypes(pokemon) {
+
+    let types = JSON.stringify(pokemon.types);
+
+    let objectTypes = JSON.parse(types);
+
+    let AllTypes = " ";
+
+    for (let i = 0; i < objectTypes.length; i++) {
+        AllTypes = AllTypes + objectTypes[i]["name"] + ` `;
+    }
+
+    return AllTypes;
+}
+
+//Cibler EvolutionsPre
+function getPokemonEvolutionsPre(pokemon) {
+    let evolutions = JSON.stringify(pokemon.evolution);
+
+    let objectEvolutions = JSON.parse(evolutions);
+
+    // Cibler Évolution Précédente
+    if (objectEvolutions && objectEvolutions["pre"] !== null) {
+        let EvolutionPreTab = objectEvolutions["pre"];
+
+        let EvolutionPokeName = EvolutionPreTab[0]["name"];
+
+        console.log('Evolution Pre' + EvolutionPokeName);
+
+        return EvolutionPreTab;
+    }
+
+}
+
+//Cibler EvolutionsNext
+function getPokemonEvolutionsNext(pokemon) {
+    let evolutions = JSON.stringify(pokemon.evolution);
+
+    let objectEvolutions = JSON.parse(evolutions);
+
+    if (objectEvolutions && objectEvolutions["next"] !== null) {
+        let EvolutionNextTab = objectEvolutions["next"];
+
+        let EvolutionPokeName = EvolutionNextTab[0]["name"];
+
+        console.log('Evolution Next' + EvolutionPokeName);
+
+        return EvolutionNextTab;
+    }
+}
 
 //LISTE DE POKEMON
 function showPokemon(pokemon) {
@@ -30,37 +106,20 @@ function showPokemon(pokemon) {
     let cible = document.getElementById("listPokemon");
 
     //Cibler name
-    let name = JSON.stringify(pokemon.name);
-
-    let objectName = JSON.parse(name);
-
-    let PokeName = objectName["fr"];
+    let PokeName = getPokemonName(pokemon);
 
     //Cibler Sprites
-    let sprites = JSON.stringify(pokemon.sprites);
-
-    let objectSprites = JSON.parse(sprites);
-
-    let PokeSprites = objectSprites["regular"];
+    let PokeSprites = getPokemonSprites(pokemon);
 
     //Cibler Types
-    let types = JSON.stringify(pokemon.types);
-
-    let objectTypes = JSON.parse(types);
-
-    console.log(objectTypes);
-
-    // for (let i = 0; i >= objectTypes.length; i++) {
-    //     let PokeTypes = PokeTypes + objectTypes[i]["name"];
-    //     return PokeTypes;
-    // }
-
+    let PokeTypes = getPokemonTypes(pokemon);
 
     //Créer le contenu
     let contenu = `
         <article class="PokemonCard" onclick="showPokeDetails(`+ pokemon.pokedexId + `)">
             <p> n°`+ pokemon.pokedexId + `
             </br> Nom : `+ PokeName + `
+            </br> Type : `+ PokeTypes + `
             </p>
             </br>
             <img
@@ -74,12 +133,14 @@ function showPokemon(pokemon) {
 
 }
 
+
+
+
 //RETOUR DU NUMÉRO DE LA GÉNÉRATION
 function returnGeneration(NumberGen) {
 
     //LISTE POKEMON PAR GENERATION
     function showListPokemon(list) {
-
         list.forEach(element => {
             showPokemon(element)
         });
@@ -92,6 +153,12 @@ function returnGeneration(NumberGen) {
         .then((listPokemon) => showListPokemon(listPokemon));
 }
 
+
+
+
+
+
+
 //POKEMON DETAILS
 
 async function showPokeDetails(PokeID) {
@@ -100,38 +167,20 @@ async function showPokeDetails(PokeID) {
     let pokemon = await response.json();
 
     //Cibler name
-    let name = JSON.stringify(pokemon.name);
-
-    let objectName = JSON.parse(name);
-
-    let PokeName = objectName["fr"];
+    let PokeName = getPokemonName(pokemon);
 
     //Cibler Sprites
-    let sprites = JSON.stringify(pokemon.sprites);
-
-    let objectSprites = JSON.parse(sprites);
-
-    let PokeSprites = objectSprites["regular"];
+    let PokeSprites = getPokemonSprites(pokemon);
 
     //Cibler Types
-    let types = JSON.stringify(pokemon.types);
+    let PokeTypes = getPokemonTypes(pokemon);
 
-    let objectTypes = JSON.parse(types);
+    //Cibler Evolution
+    let EvolutionPre = getPokemonEvolutionsPre(pokemon);
 
-    console.log(objectTypes);
+    let EvolutionNext = getPokemonEvolutionsNext(pokemon);
 
-    let PokeTypes = objectTypes[0]["name"];
-
-    let Evolution = JSON.stringify(pokemon.evolution);
-
-    console.log(Evolution);
-
-    let objectEvolution = JSON.parse(Evolution);
-
-    console.log(objectEvolution);
-
-    let PokeEvolution = objectEvolution["next"]["pokedexId"];
-
+    console.log(PokeEvolutions);
 
     let contenu = `
         <article>
@@ -146,16 +195,16 @@ async function showPokeDetails(PokeID) {
         src="`+ PokeSprites + `"
         alt="Image de `+ PokeName + `" />
         </article>
-        <button class="Evolutions" type="button" onclick="EvolutionAnt()"> < </button>
-        <button class="Evolutions" type="button" onclick="EvolutionPrec()"> > </button>
+        <button class="Evolutions" type="button" onclick="EvolutionAnt()"> < `+ EvolutionPre[0]["name"] +`</button>
+        <button class="Evolutions" type="button" onclick="EvolutionPrec()"> `+ EvolutionNext[0]["name"] +` > </button>
         </br>
-        <button class="goBack" type="button" onclick="goBack()">Retourner à la liste</button>
-        <p>TEST :`+ PokeEvolution + `</p>`;
+        <button class="goBack" type="button" onclick="goBack()">Retourner à la liste</button>`;
 
     $("#PokeDetails").html(contenu);
     $("#listPokemon").hide();
     $("#PokeDetails").show();
 }
+
 //REVENIR EN ARRIÈRE SUR LA LISTE
 function goBack() {
     $("#PokeDetails").hide();
@@ -173,10 +222,8 @@ async function getRandomPokemon() {
     let RandomId = Math.floor(Math.random() * listAllPokemon.length) + 1;
 
     let PokeRandom = listAllPokemon[RandomId];
-    console.log(PokeRandom);
 
     return PokeRandom;
-
 }
 
 getRandomPokemon()
