@@ -19,6 +19,8 @@ function showGeneration(Generation) {
 
 
 
+
+
 //FONCTIONS RÉCUPÉRATION DES DONNÉES DES POKEMON UTILISÉS
 //Cibler name
 function getPokemonName(pokemon) {
@@ -176,9 +178,12 @@ function showPokemon(pokemon) {
 
 //RETOUR DU NUMÉRO DE LA GÉNÉRATION
 function returnGeneration(NumberGen) {
+    let cible = document.getElementById("listPokemon");
+        cible.innerHTML = " ";
 
     //LISTE POKEMON PAR GENERATION
     function showListPokemon(list) {
+
         list.forEach(element => {
             showPokemon(element)
         });
