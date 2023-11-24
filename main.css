@@ -10,8 +10,12 @@ nav {
  
  nav > ul {
     display: flex;
+    list-style: none;
     flex-direction: row;
     padding : 0;
+ }
+ nav > a {
+    list-style: none;
  }
     
  nav > ul {
