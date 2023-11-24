@@ -38,7 +38,7 @@ nav {
     background-color: rgb(206, 51, 51);
     transition: 1s;
  }
- 
+
  h1{
     color: rgb(251, 251, 251);
     display: flex;
@@ -100,6 +100,7 @@ img {
     box-shadow: 0 0.4rem #dfd9d9;
     cursor: pointer;
     margin-bottom: 3%;
+    margin-top: 20px;
    }
    
    button:active {
