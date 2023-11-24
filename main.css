@@ -12,10 +12,12 @@ nav {
     display: flex;
     list-style: none;
     flex-direction: row;
-    padding : 0;
+    margin: 0;
+    padding: 0;
  }
  nav > a {
     list-style: none;
+    list-style: inside;
  }
     
  nav > ul {
