@@ -1,8 +1,36 @@
-h1{
-   color: rgb(41, 41, 136);
-   font-family: sans-serif;
-}
 
+/* NAVBAR */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10px;
+    background-color: rgb(25, 36, 99);
+ }
+ 
+ nav > ul {
+    display: flex;
+    flex-direction: row;
+    padding : 0;
+ }
+ 
+ nav > ul  {
+    position: relative;
+    padding: 10px 10px;
+    margin: 10px;
+ }
+ 
+ nav > ul:hover {
+    background-color: rgb(247, 11, 11);
+    transition: 1s;
+ }
+ 
+ h1{
+    color: rgb(252, 252, 252);
+    display: flex;
+    padding-top: 2px;
+    font-family: sans-serif;
+ }
 
 .infos{
     margin: 5%;
