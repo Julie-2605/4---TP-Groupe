@@ -18,14 +18,6 @@ function showGeneration(Generation) {
 }
 
 
-//Récupérer données API POUR AFFICHER LES BUTTONS GÉNÉRATION
-fetch('https://tyradex.vercel.app/api/v1/gen')
-    .then((response) => response.json())
-    .then((listPokemon) => showListGeneration(listPokemon));
-
-
-
-
 
 //FONCTIONS RÉCUPÉRATION DES DONNÉES DES POKEMON UTILISÉS
 //Cibler name
@@ -63,7 +55,7 @@ function getPokemonTypes(pokemon) {
     return AllTypes;
 }
 
-
+//Cibler Evolutions
 //Cibler EvolutionsPre Name
 function getEvolutionsPreName(pokemon) {
     let evolutions = JSON.stringify(pokemon.evolution);
@@ -74,7 +66,7 @@ function getEvolutionsPreName(pokemon) {
     if (objectEvolutions && objectEvolutions["pre"] !== null) {
         let EvolutionPreTab = objectEvolutions["pre"];
 
-        let EvolutionPreName = EvolutionPreTab[0]["name"];
+        let EvolutionPreName = EvolutionPreTab[EvolutionPreTab.length - 1]["name"];
 
         return EvolutionPreName;
     }
@@ -91,7 +83,9 @@ function getEvolutionsPreID(pokemon) {
     if (objectEvolutions && objectEvolutions["pre"] !== null) {
         let EvolutionPreTab = objectEvolutions["pre"];
 
-        let EvolutionPreID = EvolutionPreTab["pokedexId"];
+        let EvolutionPreID = EvolutionPreTab[EvolutionPreTab.length - 1]["pokedexId"];
+
+        console.log(EvolutionPreID);
 
         return EvolutionPreID;
     }
@@ -122,10 +116,21 @@ function getEvolutionsNextID(pokemon) {
     if (objectEvolutions && objectEvolutions["next"] !== null) {
         let EvolutionNextTab = objectEvolutions["next"];
 
-        let EvolutionNextID = EvolutionNextTab["pokedexId"];
+        let EvolutionNextID = EvolutionNextTab[0]["pokedexId"];
+
+        console.log(EvolutionNextID);
 
         return EvolutionNextID;
     }
+}
+
+//Accès Evolutions Button
+async function EvolutionPre(EvolutionPreID) {
+    showPokeDetails(EvolutionPreID);
+}
+
+async function EvolutionNext(EvolutionNextID) {
+    showPokeDetails(EvolutionNextID);
 }
 
 
@@ -146,8 +151,6 @@ function showPokemon(pokemon) {
     let PokeTypes = getPokemonTypes(pokemon);
 
     //Créer le contenu
-
-   
 
     let contenu = `
         <article class="PokemonCard" onclick="showPokeDetails(`+ pokemon.pokedexId + `)">
@@ -213,17 +216,9 @@ async function showPokeDetails(PokeID) {
 
     let EvolutionNextName = getEvolutionsNextName(pokemon);
 
-    // let EvolutionPreID = getEvolutionsPreID(pokemon);
+    let EvolutionPreID = getEvolutionsPreID(pokemon);
 
-    // let EvolutionNextID = getEvolutionsNextID(pokemon);
-
-    function EvolutionPre(EvolutionPreID) {
-        fetch('https://tyradex.vercel.app/api/v1/pokemon/' + EvolutionPreID);
-
-    }
-
-
-
+    let EvolutionNextID = getEvolutionsNextID(pokemon);
 
     let contenu = `
         <article>
@@ -238,8 +233,8 @@ async function showPokeDetails(PokeID) {
         src="`+ PokeSprites + `"
         alt="Image de `+ PokeName + `" />
         </article>
-        <button class="Evolutions" type="button" onclick="EvolutionPre()"> < `+ EvolutionPreName +`</button>
-        <button class="Evolutions" type="button" onclick="EvolutionNext()"> `+ EvolutionNextName +` > </button>
+        <button class="Evolutions" type="button" onclick="EvolutionPre(`+ EvolutionPreID +`)"> < `+ EvolutionPreName +`</button>
+        <button class="Evolutions" type="button" onclick="EvolutionNext(`+ EvolutionNextID +`)"> `+ EvolutionNextName +` > </button>
         </br>
         <button class="goBack" type="button" onclick="goBack()">Retourner à la liste</button>`;
 
@@ -269,11 +264,6 @@ async function getRandomPokemon() {
     return PokeRandom;
 }
 
-getRandomPokemon()
-    .then((PokeRandom) => {
-        let contenu = showPokemon(PokeRandom);
-        $("#PokeRandom").html(contenu);
-    });
 
 
 
@@ -290,3 +280,21 @@ function showListDetails() {
 
 }
 
+
+
+
+
+//Récupérer données API POUR AFFICHER LES BUTTONS GÉNÉRATION
+function startGen() {
+    fetch('https://tyradex.vercel.app/api/v1/gen')
+    .then((response) => response.json())
+    .then((listPokemon) => showListGeneration(listPokemon));
+}
+
+function startIndex() {
+    getRandomPokemon()
+    .then((PokeRandom) => {
+        let contenu = showPokemon(PokeRandom);
+        $("#PokeRandom").html(contenu);
+    });
+}
